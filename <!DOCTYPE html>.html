@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Drink Selection</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+        button {
+            margin: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>Select Your Drink</h1>
+    <button onclick="selectDrink('Cherry Pepsi')">Cherry Pepsi</button>
+    <button onclick="selectDrink('Lemonade')">Lemonade</button>
+    <button onclick="selectDrink('Water')">Water</button>
+    <button onclick="selectDrink('Blackcurrant Squash')">Blackcurrant Squash</button>
+    <button onclick="selectDrink('Milk')">Milk</button>
+    <button onclick="selectDrink('Fanta')">Fanta</button>
+    <button onclick="selectDrink('Rio')">Rio</button>
+
+    <script>
+        function selectDrink(drink) {
+            // Clear the entire body content
+            document.body.innerHTML = '';
+
+            // Send an email with the selected drink using a server-side script
+            sendEmail(drink);
+        }
+
+        function sendEmail(drink) {
+            var xhr = new XMLHttpRequest();
+            xhr.open('POST', 'send-email.php', true);
+            xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4 && xhr.status == 200) {
+                    console.log('Email sent successfully.');
+                }
+            };
+            xhr.send('drink=' + encodeURIComponent(drink));
+        }
+    </script>
+</body>
+</html>
